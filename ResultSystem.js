@@ -23,7 +23,7 @@ delObj = {
 		console.log(theList.display());
 	},
 	end() {
-		
+		process.exit(0);
 	}
 };
 
