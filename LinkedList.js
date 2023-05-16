@@ -127,14 +127,43 @@ class LinkedList {
 			curr = curr.next;
 		}
 		//adding the overall total and average
-		let totalString = `Total - ${total}`;
-		let avgString = `Average - ${(total / endSN).toPrecision(4)}`;
+		let totalString = `TOTAL - ${total}`;
+		let avgString = `AVERAGE - ${(total / endSN).toPrecision(4)}`;
 		retString += " ".repeat(winWidth - totalString.length) + totalString;
 		retString += "\n";
 		retString += " ".repeat(winWidth - avgString.length) + avgString;
 		retString += "\n";
 		
 		return retString;
+	}
+	
+	del(snArr) { //snArr is an array of S/Ns to identify nodes to be removed
+		snArr.forEach((el, i) => snArr[i] = parseInt(el));
+		//for the above, arr.map() dey fuck up
+		let curr = this.head.next || this.head;
+		while(true) {
+			if(snArr.indexOf(curr["S/N"]) > -1) {
+				curr.prev.next = curr.next;
+				if(curr.next != null)
+					curr.next.prev = curr.prev;
+			}
+			
+			if(curr.next == null)
+				break;
+			
+			curr = curr.next;
+		}
+		//next, resetting S/Ns
+		curr = this.head.next || this.head;
+		let newSN = 0;
+		//overriding, yes
+		while(true) {
+			curr["S/N"] = ++newSN;
+			if(curr.next == null)
+				break;
+			
+			curr = curr.next;
+		}
 	}
 }
 

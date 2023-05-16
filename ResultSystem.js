@@ -16,8 +16,8 @@ delObj = {
 	add(vals) {
 		theList.addItem(vals, this.SNPointer++);
 	},
-	del(vals) { //vals arr has only one el, the serial no
-		
+	del(vals) {
+		theList.del(vals);
 	},
 	display() {
 		console.log(theList.display());
