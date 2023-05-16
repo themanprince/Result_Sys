@@ -29,7 +29,7 @@ class Node {
 		grades.set([39, 0], "F");
 		
 		for(let key of grades.keys())
-			if (this.total <= key[0] && this.total >= key[1])
+			if (this.Total <= key[0] && this.Total >= key[1])
 				return grades.get(key);
 	}
 }
@@ -58,7 +58,7 @@ class LinkedList {
 		throw new Error(`${SN} dont exist in linkedlist`)
 	}
 	
-	addItem(val, nodeBeforeSN = 0) { //the val is vals array from ResultSystem, the SN shit is for the SN of the node before it
+	addItem(val, nodeBeforeSN) { //the val is vals array from ResultSystem, the SN shit is for the SN of the node before it
 		let nodeBefore = this.getItem(nodeBeforeSN);
 		let nodeAfterThatNode = nodeBefore.next;
 		let nodeToAdd = new Node(val);

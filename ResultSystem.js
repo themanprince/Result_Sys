@@ -12,8 +12,9 @@ let theList = new List();
 //delegator obj got a couple methods to handle delegation... yes!
 //yes! I said that... and yes, I didnt think it thru
 delObj = {
+	SNPointer: 0,
 	add(vals) {
-		theList.addItem(vals);
+		theList.addItem(vals, this.SNPointer++);
 	},
 	del(vals) { //vals arr has only one el, the serial no
 		
