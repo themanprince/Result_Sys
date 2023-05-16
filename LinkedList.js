@@ -7,6 +7,8 @@ let {execSync} = require("child_process");
 //also, it gets to stay private
 //Win... Win
 let SN = 0;
+let winWidth = 50; //the char width of my terminal... tput cols nur work 
+//this was gon be used by more than one func so I made it global... forgive me *crying*
 
 class Node {
 	constructor(val, prev = null, next = null) {
@@ -69,7 +71,7 @@ class LinkedList {
 			nodeAfterThatNode.prev = nodeToAdd;
 	}
 	
-	buildLine(arr, winWidth = 50) {
+	buildLine(arr) {
 		/*
 		This is responsible for building each line of the output
 		the input arr must be arranger in the following order
@@ -113,14 +115,24 @@ class LinkedList {
 		retString += this.buildLine(["S/N", "SUBJECT", "C/A", "EXAM", "TOTAL", "GRADE"]);
 		retString += "\n";
 		let curr = this.head.next || this.head;
+		let total = 0, endSN; //for average calculation
 		while(true){
 			retString += this.buildLine([curr["S/N"], curr["Subject"], curr["C/A"], curr["Exam"], curr["Total"], curr["Grade"]]);
 			retString += "\n";
+			total += curr["Total"];
+			endSN = curr["S/N"];
 			if(curr.next == null)
 				break;
 			
 			curr = curr.next;
 		}
+		//adding the overall total and average
+		let totalString = `Total - ${total}`;
+		let avgString = `Average - ${(total / endSN).toPrecision(4)}`;
+		retString += " ".repeat(winWidth - totalString.length) + totalString;
+		retString += "\n";
+		retString += " ".repeat(winWidth - avgString.length) + avgString;
+		retString += "\n";
 		
 		return retString;
 	}
