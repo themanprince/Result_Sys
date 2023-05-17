@@ -134,6 +134,8 @@ class LinkedList {
 		retString += "\n";
 		retString += " ".repeat(winWidth - avgString.length) + avgString;
 		retString += "\n";
+		//resetting total
+		total = 0;
 		
 		return retString;
 	}

@@ -52,4 +52,6 @@ function ask() {
 		ask();
 	});
 }
+//printing the usage
+console.log(`\nUSAGE (Commands):\n_add (subject, C/A score, Exam Score)\n_del (S/N 1, S/N 2,... S/N n)\n_display\n_end\n`);
 ask();
