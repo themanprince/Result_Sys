@@ -1,4 +1,5 @@
-let {execSync} = require("child_process");
+//let {execSync} = require("child_process");
+
 //NOTE: THIS MODULE IS TAILORED FOR ResultSystem.js
 
 
@@ -15,7 +16,7 @@ class Node {
 		//I'll assume val is the vals Array from ResultSystem
 		//in the end of the next line, what I simply did is, "if its a number, parse it"
 		["Subject", "C/A", "Exam"].forEach((item, i) => this[item] = parseFloat(val[i]) || val[i]);
-		this["S/N"] = SN++; //head node gets SN 0, and so on
+		this["S/N"] = SN; //head node gets SN 0, and so on
 		this.prev = prev;
 		this.next = next;
 	}
@@ -60,8 +61,8 @@ class LinkedList {
 		throw new Error(`${SN} dont exist in linkedlist`)
 	}
 	
-	addItem(val, nodeBeforeSN) { //the val is vals array from ResultSystem, the SN shit is for the SN of the node before it
-		let nodeBefore = this.getItem(nodeBeforeSN);
+	addItem(val) { //the val is vals array from ResultSystem, the SN shit is for the SN of the node before it
+		let nodeBefore = this.getItem(SN++);
 		let nodeAfterThatNode = nodeBefore.next;
 		let nodeToAdd = new Node(val);
 		nodeBefore.next = nodeToAdd;
@@ -156,7 +157,6 @@ class LinkedList {
 		//next, resetting S/Ns
 		curr = this.head.next || this.head;
 		let newSN = 0;
-		//overriding, yes
 		while(true) {
 			curr["S/N"] = ++newSN;
 			if(curr.next == null)
@@ -164,6 +164,7 @@ class LinkedList {
 			
 			curr = curr.next;
 		}
+		SN = newSN; //to fix that issue with using add command after delete command
 	}
 }
 

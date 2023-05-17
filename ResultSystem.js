@@ -12,9 +12,8 @@ let theList = new List();
 //delegator obj got a couple methods to handle delegation... yes!
 //yes! I said that... and yes, I didnt think it thru
 delObj = {
-	SNPointer: 0,
 	add(vals) {
-		theList.addItem(vals, this.SNPointer++);
+		theList.addItem(vals);
 	},
 	del(vals) {
 		theList.del(vals);
